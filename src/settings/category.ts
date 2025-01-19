@@ -1,6 +1,7 @@
 import './settings.css';
 import { App, PluginSettingTab, Setting, addIcon, setIcon } from 'obsidian';
 import ObsidianToAnkiPlugin from 'src/main';
+import { DEFAULT_SETTINGS } from '.';
 
 /**
  * A mapping of category IDs with their corresponding names.
@@ -36,6 +37,10 @@ export abstract class SettingsCategory {
 		this.plugin = plugin;
 	}
 
+	/**
+	 * Displays the category.
+	 * @param container the container element to display the category
+	 */
 	abstract display(container: HTMLElement): void;
 }
 

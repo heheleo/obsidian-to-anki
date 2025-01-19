@@ -9,14 +9,14 @@ import { PluginSettingsTab } from './category';
  * Defines the settings for the plugin.
  */
 export interface PluginSettings {
-	directory: string;
+	directories: string;
 }
 
 /**
  * Defines the default settings for the plugin.
  */
 export const DEFAULT_SETTINGS: PluginSettings = {
-	directory: 'default'
+	directories: ''
 };
 
 /**
