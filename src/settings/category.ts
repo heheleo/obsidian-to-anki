@@ -1,7 +1,7 @@
 import './settings.css';
 import { App, PluginSettingTab, Setting, addIcon, setIcon } from 'obsidian';
 import ObsidianToAnkiPlugin from 'src/main';
-import { DEFAULT_SETTINGS } from '.';
+import { DEFAULT_SETTINGS, PluginSettings } from '.';
 
 /**
  * A mapping of category IDs with their corresponding names.
@@ -35,6 +35,20 @@ export abstract class SettingsCategory {
 
 	constructor(plugin: ObsidianToAnkiPlugin) {
 		this.plugin = plugin;
+	}
+
+	/**
+	 * Updates and saves a setting.
+	 * @param setting the setting to update
+	 * @param value the new value of the setting
+	 * @returns {Promise<void>} a promise that resolves when the setting is updated
+	 */
+	protected async updateAndSaveSetting(
+		setting: keyof PluginSettings,
+		value: string
+	) {
+		this.plugin.settings[setting] = value;
+		return this.plugin.saveSettings();
 	}
 
 	/**

@@ -84,3 +84,13 @@
 	color: #ffffff;
 	font-size: large;
 }
+
+/* A emphasis card */
+.o2a-emphasis {
+	padding: 16px;
+	font-size: small;
+	background-color: #add8e63b;
+	border-radius: 4px;
+	margin-top: 8px;
+	margin-bottom: 8px;
+}

@@ -17,10 +17,9 @@ export default class FilesCategory extends SettingsCategory {
 				text
 					.setPlaceholder('Enter folder names, seperated by commas')
 					.setValue(this.plugin.settings.directories)
-					.onChange(async (value) => {
-						this.plugin.settings.directories = value;
-						await this.plugin.saveSettings();
-					})
+					.onChange((value) =>
+						this.updateAndSaveSetting('directories', value)
+					)
 			);
 	}
 }

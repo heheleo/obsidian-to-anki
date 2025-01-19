@@ -9,14 +9,30 @@ import { PluginSettingsTab } from './category';
  * Defines the settings for the plugin.
  */
 export interface PluginSettings {
+	// Files:
 	directories: string;
+
+	// Parsing:
+	cardBeginning: string;
+	cardEnding: string;
+	deckBeginning: string;
+	defaultDeck: string;
+	cardTypeBeginning: string;
 }
 
 /**
  * Defines the default settings for the plugin.
  */
 export const DEFAULT_SETTINGS: PluginSettings = {
-	directories: ''
+	// Files:
+	directories: '',
+
+	// Parsing:
+	cardBeginning: '## Anki',
+	cardEnding: 'Anki End',
+	deckBeginning: 'Deck:',
+	defaultDeck: '',
+	cardTypeBeginning: 'Card Type:'
 };
 
 /**
