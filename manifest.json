@@ -1,0 +1,10 @@
+{
+	"id": "obsidian-to-anki",
+	"name": "Obsidian To Anki",
+	"version": "1.0.0",
+	"minAppVersion": "0.15.0",
+	"description": "Demonstrates some of the capabilities of the Obsidian API.",
+	"author": "Leo",
+	"authorUrl": "https://obsidian.md",
+	"isDesktopOnly": true
+}
