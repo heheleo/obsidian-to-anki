@@ -13,11 +13,11 @@ export interface PluginSettings {
 	directories: string;
 
 	// Parsing:
-	cardBeginning: string;
-	cardEnding: string;
+	noteBeginning: string;
+	noteEnding: string;
 	deckBeginning: string;
 	defaultDeck: string;
-	cardTypeBeginning: string;
+	noteTypeBeginning: string;
 
 	// Anki:
 	ankiConnectPort: string;
@@ -31,11 +31,11 @@ export const DEFAULT_SETTINGS: PluginSettings = {
 	directories: '',
 
 	// Parsing:
-	cardBeginning: '## Anki',
-	cardEnding: 'Anki End',
+	noteBeginning: '## Anki',
+	noteEnding: 'Anki End',
 	deckBeginning: 'Deck:',
 	defaultDeck: '',
-	cardTypeBeginning: 'Card Type:',
+	noteTypeBeginning: 'Card Type:',
 
 	// Anki:
 	ankiConnectPort: '8765'

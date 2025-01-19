@@ -14,48 +14,48 @@ export default class ParsingCategory extends SettingsCategory {
 			cls: 'o2a-emphasis'
 		});
 
-		// Card Beginning:
+		// Note Beginning:
 		new Setting(container)
-			.setName('Card Beginning')
+			.setName('Note Beginning')
 			.setDesc(
-				"The text to search for which marks the beginning of a new Anki card. e.g. 'START ANKI', '# Anki'"
+				"The text to search for which marks the beginning of a new Anki note. e.g. 'START ANKI', '# Anki'"
 			)
 			.addText((text) =>
 				text
 					.setPlaceholder('## Anki')
-					.setValue(this.plugin.settings.cardBeginning)
+					.setValue(this.plugin.settings.noteBeginning)
 					.onChange((value) =>
-						this.updateAndSaveSetting('cardBeginning', value)
+						this.updateAndSaveSetting('noteBeginning', value)
 					)
 			);
 
-		// Card Ending:
+		// Note Ending:
 		new Setting(container)
-			.setName('Card Ending')
+			.setName('Note Ending')
 			.setDesc(
-				"The text to search for which marks the end of a new Anki card. e.g. 'END ANKI', '---'"
+				"The text to search for which marks the end of a new Anki note. e.g. 'END ANKI', '---'"
 			)
 			.addText((text) =>
 				text
 					.setPlaceholder('Anki End')
-					.setValue(this.plugin.settings.cardEnding)
+					.setValue(this.plugin.settings.noteEnding)
 					.onChange((value) =>
-						this.updateAndSaveSetting('cardEnding', value)
+						this.updateAndSaveSetting('noteEnding', value)
 					)
 			);
 
-		// Card Type beginning:
+		// Note Type beginning:
 		new Setting(container)
-			.setName('Card Type Beginning')
+			.setName('Note Type Beginning')
 			.setDesc(
-				"The text to search for which specifies what card type the card belongs to. e.g. 'Type:', 'Card Type:'"
+				"The text to search for which specifies what note type the note belongs to. e.g. 'Type:', 'Note Type:'"
 			)
 			.addText((text) =>
 				text
 					.setPlaceholder('')
-					.setValue(this.plugin.settings.cardTypeBeginning)
+					.setValue(this.plugin.settings.noteTypeBeginning)
 					.onChange((value) =>
-						this.updateAndSaveSetting('cardTypeBeginning', value)
+						this.updateAndSaveSetting('noteTypeBeginning', value)
 					)
 			);
 
@@ -63,7 +63,7 @@ export default class ParsingCategory extends SettingsCategory {
 		new Setting(container)
 			.setName('Deck Beginning')
 			.setDesc(
-				"The text to search for which specifies what deck the card belongs to. e.g. 'Deck:', 'Store card in'"
+				"The text to search for which specifies what deck the note belongs to. e.g. 'Deck:', 'Store note in'"
 			)
 			.addText((text) =>
 				text
@@ -78,7 +78,7 @@ export default class ParsingCategory extends SettingsCategory {
 		new Setting(container)
 			.setName('Default Deck')
 			.setDesc(
-				'If you do not specify the deck, which deck should the card go to?'
+				'If you do not specify the deck, which deck should the note go to?'
 			)
 			.addText((text) =>
 				text
