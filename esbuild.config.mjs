@@ -1,8 +1,9 @@
-import esbuild from 'esbuild'
-import process from 'process'
-import builtins from 'builtin-modules'
+import esbuild from 'esbuild';
+import process from 'process';
+import builtins from 'builtin-modules';
+import { rename } from 'fs/promises';
 
-const prod = process.argv[2] === 'production'
+const prod = process.argv[2] === 'production';
 
 const context = await esbuild.context({
 	entryPoints: ['src/main.ts'],
@@ -30,11 +31,12 @@ const context = await esbuild.context({
 	treeShaking: true,
 	outfile: 'main.js',
 	minify: prod
-})
+});
 
 if (prod) {
-	await context.rebuild()
-	process.exit(0)
+	await context.rebuild();
+	await rename('main.css', 'styles.css');
+	process.exit(0);
 } else {
-	await context.watch()
+	await context.watch();
 }
