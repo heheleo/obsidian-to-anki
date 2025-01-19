@@ -49,6 +49,7 @@
 
 /* The element that contains the settings display */
 .o2a-settings-display {
+	margin-top: 20px;
 	height: 100%;
 	width: 100%;
 }
@@ -61,4 +62,25 @@
 	align-items: center;
 	height: 100%;
 	width: 100%;
+}
+
+/* The settings header */
+.o2a-settings-header {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 6px;
+}
+
+/* The settings header icon */
+.o2a-settings-header > svg {
+	height: 24px;
+	width: 24px;
+	color: #ffffff;
+}
+
+/* The settings header text */
+.o2a-settings-header > h2 {
+	color: #ffffff;
+	font-size: large;
 }

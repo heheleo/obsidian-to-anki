@@ -1,5 +1,5 @@
 import './settings.css';
-import { App, PluginSettingTab, Setting, setIcon } from 'obsidian';
+import { App, PluginSettingTab, Setting, addIcon, setIcon } from 'obsidian';
 import ObsidianToAnkiPlugin from 'src/main';
 
 /**
@@ -72,6 +72,15 @@ export class PluginSettingsTab extends PluginSettingTab {
 	display(): void {
 		const { containerEl } = this;
 		containerEl.empty();
+
+		// Create a header:
+		const headerContainer = containerEl.createDiv({
+			cls: 'o2a-settings-header'
+		});
+		setIcon(headerContainer, 'settings');
+		headerContainer.createEl('h2', {
+			text: 'Obsidian to Anki Settings'
+		});
 
 		// Create the tabs row:
 		const tabsContainer = containerEl.createDiv({
