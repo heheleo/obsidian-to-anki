@@ -18,6 +18,9 @@ export interface PluginSettings {
 	deckBeginning: string;
 	defaultDeck: string;
 	cardTypeBeginning: string;
+
+	// Anki:
+	ankiConnectPort: string;
 }
 
 /**
@@ -32,7 +35,10 @@ export const DEFAULT_SETTINGS: PluginSettings = {
 	cardEnding: 'Anki End',
 	deckBeginning: 'Deck:',
 	defaultDeck: '',
-	cardTypeBeginning: 'Card Type:'
+	cardTypeBeginning: 'Card Type:',
+
+	// Anki:
+	ankiConnectPort: '8765'
 };
 
 /**

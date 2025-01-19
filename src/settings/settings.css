@@ -94,3 +94,8 @@
 	margin-top: 8px;
 	margin-bottom: 8px;
 }
+
+.o2a-emphasis[type="danger"] {
+	background-color: #e6adad3b;
+}
+
