@@ -1,0 +1,64 @@
+/* The container of the row of tabs */
+.o2a-tabs-container {
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* The individual tabs */
+.o2a-tab {
+	margin-bottom: -1px;
+	display: flex;
+	gap: 4px;
+
+	cursor: pointer;
+
+	padding: 8px;
+	border-radius: 8px 8px 0px 0px;
+
+	justify-content: center;
+	align-items: center;
+
+	transition: background-color 300ms ease-in;
+
+	border-bottom: transparent 2px solid;
+}
+
+.o2a-tab[selected='true'] {
+	background-color: rgba(255, 255, 255, 0.1);
+	border-bottom: #add8e6 2px solid;
+}
+
+.o2a-tab:hover {
+	background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* The icon within the tab */
+.o2a-tab > svg {
+	width: 16px;
+	height: 16px;
+}
+
+/* The tab label */
+.o2a-tab > .o2a-tab-label {
+	color: #dcdcdc;
+	font-size: small;
+}
+
+/* The element that contains the settings display */
+.o2a-settings-display {
+	height: 100%;
+	width: 100%;
+}
+
+/* A container that is centered using flexbox */
+.o2a-center-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+}
