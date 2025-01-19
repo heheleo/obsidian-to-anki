@@ -44,6 +44,36 @@ export default class ParsingCategory extends SettingsCategory {
 					)
 			);
 
+		// Note Front Beginning:
+		new Setting(container)
+			.setName('Note Front Beginning')
+			.setDesc(
+				"The text to search for which specifies the beginning of the front of the note. e.g. 'Front:', 'Question:'"
+			)
+			.addText((text) =>
+				text
+					.setPlaceholder('Note Front Beginning')
+					.setValue(this.plugin.settings.noteFrontBeginning)
+					.onChange((value) =>
+						this.updateAndSaveSetting('noteFrontBeginning', value)
+					)
+			);
+
+		// Note Back Beginning:
+		new Setting(container)
+			.setName('Note Back Beginning')
+			.setDesc(
+				"The text to search for which specifies the beginning of the back of the note. e.g. 'Back:', 'Answer:'"
+			)
+			.addText((text) =>
+				text
+					.setPlaceholder('Note Back Beginning')
+					.setValue(this.plugin.settings.noteBackBeginning)
+					.onChange((value) =>
+						this.updateAndSaveSetting('noteBackBeginning', value)
+					)
+			);
+
 		// Note Type beginning:
 		new Setting(container)
 			.setName('Note Type Beginning')

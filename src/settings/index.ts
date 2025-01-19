@@ -18,6 +18,8 @@ export interface PluginSettings {
 	deckBeginning: string;
 	defaultDeck: string;
 	noteTypeBeginning: string;
+	noteFrontBeginning: string;
+	noteBackBeginning: string;
 
 	// Anki:
 	ankiConnectPort: string;
@@ -36,6 +38,8 @@ export const DEFAULT_SETTINGS: PluginSettings = {
 	deckBeginning: 'Deck:',
 	defaultDeck: '',
 	noteTypeBeginning: 'Card Type:',
+	noteFrontBeginning: 'Front:',
+	noteBackBeginning: 'Back:',
 
 	// Anki:
 	ankiConnectPort: '8765'
