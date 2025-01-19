@@ -16,14 +16,14 @@
 	"devDependencies": {
 		"@types/node": "^16.11.6",
 		"builtin-modules": "3.3.0",
-		"esbuild": "0.17.3",
+		"esbuild": "0.24.2",
 		"husky": "^9.1.7",
 		"lint-staged": "^15.4.1",
 		"obsidian": "latest",
 		"oxlint": "^0.15.7",
 		"prettier": "^3.4.2",
 		"tslib": "2.4.0",
-		"typescript": "4.7.4"
+		"typescript": "5.7.3"
 	},
 	"packageManager": "pnpm@9.15.4+sha512.b2dc20e2fc72b3e18848459b37359a32064663e5627a51e4c74b2c29dd8e8e0491483c3abb40789cfd578bf362fb6ba8261b05f0387d76792ed6e23ea3b1b6a0",
 	"lint-staged": {
