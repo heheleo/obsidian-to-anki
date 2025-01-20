@@ -1,7 +1,7 @@
 import { PluginSettingTab } from 'obsidian';
 import ObsidianToAnkiPlugin from 'src/main';
 import { mount, unmount } from 'svelte';
-import type { PluginSettings } from '.';
+import type { PluginSettings } from './defaults';
 import CategoryComponent from './CategoryComponent.svelte';
 
 /**

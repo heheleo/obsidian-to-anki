@@ -6,46 +6,6 @@ import ParsingCategory from './categories/parsing';
 import { PluginSettingsTab } from './category';
 
 /**
- * Defines the settings for the plugin.
- */
-export interface PluginSettings {
-	// Files:
-	directories: string;
-
-	// Parsing:
-	noteBeginning: string;
-	noteEnding: string;
-	deckBeginning: string;
-	defaultDeck: string;
-	noteTypeBeginning: string;
-	noteFrontBeginning: string;
-	noteBackBeginning: string;
-
-	// Anki:
-	ankiConnectPort: string;
-}
-
-/**
- * Defines the default settings for the plugin.
- */
-export const DEFAULT_SETTINGS: PluginSettings = {
-	// Files:
-	directories: '',
-
-	// Parsing:
-	noteBeginning: '## Anki',
-	noteEnding: 'Anki End',
-	deckBeginning: 'Deck:',
-	defaultDeck: '',
-	noteTypeBeginning: 'Card Type:',
-	noteFrontBeginning: 'Front:',
-	noteBackBeginning: 'Back:',
-
-	// Anki:
-	ankiConnectPort: '8765'
-};
-
-/**
  * Configures setting tabs to the plugin, with the ability of displaying
  * different categories of settings.
  * @param plugin the plugin instance
