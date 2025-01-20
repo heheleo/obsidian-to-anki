@@ -1,7 +1,8 @@
-import './settings.css';
-import { App, PluginSettingTab, Setting, addIcon, setIcon } from 'obsidian';
+import { PluginSettingTab, setIcon } from 'obsidian';
 import ObsidianToAnkiPlugin from 'src/main';
-import { DEFAULT_SETTINGS, PluginSettings } from '.';
+import type { PluginSettings } from '.';
+import CategoryComponent from './CategoryComponent.svelte';
+import { mount, unmount } from 'svelte';
 
 /**
  * A mapping of category IDs with their corresponding names.
@@ -79,6 +80,10 @@ export class PluginSettingsTab extends PluginSettingTab {
 	 * The callback function that will be called when the user switches category tabs.
 	 */
 	private onCategoryTabSwitch: (newCategory: string) => void;
+	/**
+	 * The Svelte component handling the setting categories.
+	 */
+	private categoryComponent: ReturnType<typeof CategoryComponent> | undefined;
 
 	constructor(plugin: ObsidianToAnkiPlugin) {
 		super(plugin.app, plugin);
@@ -92,78 +97,16 @@ export class PluginSettingsTab extends PluginSettingTab {
 		const { containerEl } = this;
 		containerEl.empty();
 
-		// Create a header:
-		const headerContainer = containerEl.createDiv({
-			cls: 'o2a-settings-header'
-		});
-		setIcon(headerContainer, 'settings');
-		headerContainer.createEl('h2', {
-			text: 'Obsidian to Anki Settings'
-		});
-
-		// Create the tabs row:
-		const tabsContainer = containerEl.createDiv({
-			cls: 'o2a-tabs-container'
-		});
-
-		// Create a tab for each category:
-		for (const category in CATEGORIES) {
-			// The name of the category.
-			const categoryName =
-				CATEGORIES[category as keyof typeof CATEGORIES];
-
-			// A div is used here as I wanted to avoid the default Obsidian styling.
-			// As a compromise, accessibility may be lacking:
-			const tab = tabsContainer.createDiv({
-				cls: 'o2a-tab',
-				attr: {
-					'aria-label': categoryName
-				}
-			});
-			tab.id = `o2a-tab-${category}`;
-
-			// Add an icon to the tab:
-			const icon = CATEGORY_ICONS[category];
-			if (icon) setIcon(tab, icon);
-
-			// Set the label in the tab:
-			tab.createEl('span', {
-				text: categoryName,
-				cls: 'o2a-tab-label'
-			});
-
-			// Add a click event listener to the tab:
-			tab.onclick = () => clickTab(category);
-
-			// Set the default selected tab:
-			if (category === this.selected) {
-				tab.setAttribute('selected', 'true');
+		// Mount the Svelte component:
+		this.categoryComponent = mount(CategoryComponent, {
+			target: this.containerEl,
+			props: {
+				categories: CATEGORIES,
+				categoryIcons: CATEGORY_ICONS,
+				defaultSelectedCategory: this.selected,
+				categoryChanged: this.onCategoryTabSwitch
 			}
-		}
-
-		// The click handler for the tabs:
-		const clickTab = (category: string) => {
-			// Check if the category is already selected:
-			if (category === this.selected) return;
-
-			// Make the original category unselected:
-			const beforeEl = document.getElementById(
-				`o2a-tab-${this.selected}`
-			);
-			if (beforeEl) {
-				beforeEl.removeAttribute('selected');
-			}
-
-			// Set the new category as selected:
-			this.selected = category;
-			const el = document.getElementById(`o2a-tab-${category}`);
-			if (el) {
-				el.setAttribute('selected', 'true');
-			}
-
-			// Call the callback function:
-			this.onCategoryTabSwitch(category);
-		};
+		});
 
 		// Create the display element:
 		this.displayElement = containerEl.createDiv({
@@ -172,6 +115,13 @@ export class PluginSettingsTab extends PluginSettingTab {
 
 		// Display the default category:
 		this.displayCategory(this.selected);
+	}
+
+	hide() {
+		if (this.categoryComponent) {
+			// Unmount the Svelte component:
+			unmount(this.categoryComponent);
+		}
 	}
 
 	/**

@@ -1,11 +1,18 @@
-import esbuild from 'esbuild';
-import process from 'process';
 import builtins from 'builtin-modules';
-import { rename } from 'fs/promises';
+import esbuild from 'esbuild';
+import esbuildSvelte from 'esbuild-svelte';
+import process from 'process';
+import { sveltePreprocess } from 'svelte-preprocess';
 
 const prod = process.argv[2] === 'production';
 
 const context = await esbuild.context({
+	plugins: [
+		esbuildSvelte({
+			compilerOptions: { css: 'injected' },
+			preprocess: sveltePreprocess()
+		})
+	],
 	entryPoints: ['src/main.ts'],
 	bundle: true,
 	external: [
@@ -35,7 +42,6 @@ const context = await esbuild.context({
 
 if (prod) {
 	await context.rebuild();
-	await rename('main.css', 'styles.css');
 	process.exit(0);
 } else {
 	await context.watch();

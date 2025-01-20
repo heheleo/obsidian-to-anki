@@ -1,0 +1,35 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* The element that contains the settings display */
+.o2a-settings-display {
+	margin-top: 20px;
+	height: 100%;
+	width: 100%;
+}
+
+/* A container that is centered using flexbox */
+.o2a-center-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+}
+
+/* A emphasis card */
+.o2a-emphasis {
+	padding: 16px;
+	font-size: small;
+	background-color: #add8e63b;
+	border-radius: 4px;
+	margin-top: 8px;
+	margin-bottom: 8px;
+}
+
+.o2a-emphasis[type="danger"] {
+	background-color: #e6adad3b;
+}
