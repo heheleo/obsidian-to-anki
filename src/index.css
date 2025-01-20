@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -30,6 +29,6 @@
 	margin-bottom: 8px;
 }
 
-.o2a-emphasis[type="danger"] {
+.o2a-emphasis[type='danger'] {
 	background-color: #e6adad3b;
 }

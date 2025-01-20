@@ -1,8 +1,8 @@
-import { PluginSettingTab, setIcon } from 'obsidian';
+import { PluginSettingTab } from 'obsidian';
 import ObsidianToAnkiPlugin from 'src/main';
+import { mount, unmount } from 'svelte';
 import type { PluginSettings } from '.';
 import CategoryComponent from './CategoryComponent.svelte';
-import { mount, unmount } from 'svelte';
 
 /**
  * A mapping of category IDs with their corresponding names.
