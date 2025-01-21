@@ -1,7 +1,6 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import Icon from 'src/views/Icon.svelte';
 	import type { CATEGORIES } from './category';
-	import { setIcon } from 'obsidian';
 
 	const {
 		categories,
@@ -14,26 +13,6 @@
 		defaultSelectedCategory: string;
 		categoryChanged: (newCategory: string) => void;
 	} = $props();
-
-	onMount(() => {
-		// Populate the icons for each category tab:
-		for (const [categoryKey, icon] of Object.entries(categoryIcons)) {
-			const iconElement = document.getElementById(
-				`o2a-settings-icon-${categoryKey}`
-			);
-			if (iconElement) {
-				setIcon(iconElement, icon);
-			}
-		}
-
-		// Populate the icon for the header:
-		const headerIconElement = document.getElementById(
-			'o2a-settings-header-icon'
-		);
-		if (headerIconElement) {
-			setIcon(headerIconElement, 'cog');
-		}
-	});
 
 	let selectedCategory = $state<string>(defaultSelectedCategory);
 
@@ -48,7 +27,7 @@
 </script>
 
 <div class="mb-4 flex gap-2 items-center">
-	<span id="o2a-settings-header-icon"></span>
+	<Icon icon="cog" class="size-4" />
 	<span class="text-xl">Obsidian to Anki</span>
 </div>
 
@@ -66,7 +45,7 @@
 			class="o2a-tab -mb-[1px] flex gap-2 cursor-pointer p-2 rounded-t-lg justify-center items-center transition-colors border-b-2 border-transparent"
 			class:o2a-tab-selected={selectedCategory === categoryKey}
 		>
-			<span id="o2a-settings-icon-{categoryKey}"></span>
+			<Icon icon={categoryIcons[categoryKey]} />
 			<span>{category}</span>
 		</div>
 	{/each}
