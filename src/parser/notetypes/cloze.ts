@@ -1,5 +1,5 @@
 import type { PluginSettings } from 'src/settings/defaults';
-import type { Note, ParserError } from '..';
+import type { ClozeNote, Note, ParserError } from '..';
 
 export function parseClozeChunk(
 	lines: string[],
@@ -8,9 +8,9 @@ export function parseClozeChunk(
 ): { note: Note; errors: ParserError[] } {
 	const errors: ParserError[] = [];
 
-	let front = '';
+	let text = '';
 	let back = '';
-	let isParsing: 'front' | 'back' | null = null;
+	let isParsing: 'text' | 'back' | null = null;
 
 	for (var i = 0; i < lines.length; ++i) {
 		const line = lines[i];
@@ -29,7 +29,7 @@ export function parseClozeChunk(
 			line.startsWith(settings.noteFrontBeginning) &&
 			line.trim().length !== settings.noteFrontBeginning.trim().length
 		) {
-			if (front !== '') {
+			if (text !== '') {
 				// The user has already defined the front of the card.
 				// Warn the user that the front of the card is being overwritten.
 				errors.push({
@@ -39,7 +39,7 @@ export function parseClozeChunk(
 				});
 			}
 
-			front = line.substring(settings.noteFrontBeginning.length);
+			text = line.substring(settings.noteFrontBeginning.length);
 			continue;
 		}
 
@@ -47,8 +47,8 @@ export function parseClozeChunk(
 		// e.g. "Front:"
 		// 	"What is 2x2?"
 		if (line === settings.noteFrontBeginning) {
-			front = '';
-			isParsing = 'front';
+			text = '';
+			isParsing = 'text';
 			continue;
 		}
 
@@ -77,20 +77,20 @@ export function parseClozeChunk(
 		}
 
 		// Append the line to the front or back of the card.
-		if (isParsing === 'front') {
-			front += line + '\n';
+		if (isParsing === 'text') {
+			text += line + '\n';
 		} else if (isParsing === 'back') {
 			back += line + '\n';
 		}
 	}
 
 	// Trim the front and back of the card:
-	front = front.trim();
+	text = text.trim();
 	back = back.trim();
 
 	// Transform the front of the card by converting Cloze deletions to Anki format:
 	// Get all of the Cloze deletions.
-	const clozeDeletions = front.match(/{{(.*?)}}/g);
+	const clozeDeletions = text.match(/{{(.*?)}}/g);
 	if (clozeDeletions && clozeDeletions.length) {
 		// Replace the Cloze deletions with Anki format:
 		clozeDeletions.forEach((deletion, index) => {
@@ -101,7 +101,7 @@ export function parseClozeChunk(
 				if (split.length > 1) {
 					// The user has provided an ID.
 					// Replace the Cloze deletion with the Anki format.
-					front = front.replace(
+					text = text.replace(
 						deletion,
 						`{{c${split[0]}::${split[1]}}}`
 					);
@@ -109,7 +109,7 @@ export function parseClozeChunk(
 				}
 			}
 
-			front = front.replace(
+			text = text.replace(
 				deletion,
 				`{{c${index + 1}::${deletion.slice(2, -2)}}}`
 			);
@@ -124,7 +124,7 @@ export function parseClozeChunk(
 	}
 
 	// Check if the front of the card is empty:
-	if (front === '') {
+	if (text === '') {
 		errors.push({
 			type: 'error',
 			fatal: true,
@@ -132,8 +132,8 @@ export function parseClozeChunk(
 		});
 	}
 
-	const note: Note = {
-		front,
+	const note: ClozeNote = {
+		front: text,
 		back: back.length ? back : undefined,
 		type: 'Cloze',
 		deck

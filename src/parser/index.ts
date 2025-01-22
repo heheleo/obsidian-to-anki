@@ -6,16 +6,7 @@ export type NoteType = 'Basic' | 'Cloze';
 // | 'Basic (and reversed card)'
 // | 'Basic (type in the answer)';
 
-export interface Note {
-	/**
-	 * The front of the note.
-	 */
-	front: string;
-	/**
-	 * The back of the note. Note that this is optional as cloze notes do not
-	 * have a back.
-	 */
-	back?: string;
+interface BaseNote {
 	/**
 	 * The type of the note.
 	 */
@@ -24,6 +15,32 @@ export interface Note {
 	 * The deck for which the note belongs to.
 	 */
 	deck: string;
+}
+
+export type Note = BasicNote | ClozeNote;
+
+export interface BasicNote extends BaseNote {
+	type: 'Basic';
+	/**
+	 * The front of the note.
+	 */
+	front: string;
+	/**
+	 * The back of the note.
+	 */
+	back: string;
+}
+
+export interface ClozeNote extends BaseNote {
+	type: 'Cloze';
+	/**
+	 * The front of the note.
+	 */
+	front: string;
+	/**
+	 * The back of the note.
+	 */
+	back?: string;
 }
 
 export interface ParserError {
