@@ -5,15 +5,14 @@
 	const { icon, class: className }: { icon: string; class?: string } =
 		$props();
 
-	let container: HTMLDivElement;
+	let container: HTMLSpanElement;
 	onMount(() => {
 		setIcon(container, icon);
-
 		if (!className) return;
 		const iconElement = container.children?.[0];
 		if (!iconElement) return;
-		iconElement.classList.add(className);
+		iconElement.classList.add(...className.split(" "));
 	});
 </script>
 
-<div bind:this={container}></div>
+<span bind:this={container} class="flex justify-center items-center"></span>
