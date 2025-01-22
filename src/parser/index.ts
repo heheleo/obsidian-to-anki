@@ -36,7 +36,7 @@ export interface ClozeNote extends BaseNote {
 	/**
 	 * The front of the note.
 	 */
-	front: string;
+	text: string;
 	/**
 	 * The back of the note.
 	 */

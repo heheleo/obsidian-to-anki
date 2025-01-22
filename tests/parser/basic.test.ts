@@ -32,8 +32,11 @@ describe('Basic note type parsing', () => {
 		expect(errors).toBeInstanceOf(Array);
 		expect(errors).toHaveLength(0);
 		const note = notes[0];
-		expect(note.front).toBe('What is the capital of France?');
-		expect(note.back).toBe('Paris');
+		expect(note.type === 'Basic');
+		if (note.type === 'Basic') {
+			expect(note.front).toBe('What is the capital of France?');
+			expect(note.back).toBe('Paris');
+		}
 	});
 
 	test('Multiline front, back notes', () => {
@@ -57,10 +60,13 @@ describe('Basic note type parsing', () => {
 		expect(errors).toBeInstanceOf(Array);
 		expect(errors).toHaveLength(0);
 		const note = notes[0];
-		expect(note.front).toBe(
-			'What is the capital of France?\n(Hint: It starts with a P)'
-		);
-		expect(note.back).toBe("Paris!\nIf you didn't know, now you know.");
+		expect(note.type === 'Basic');
+		if (note.type === 'Basic') {
+			expect(note.front).toBe(
+				'What is the capital of France?\n(Hint: It starts with a P)'
+			);
+			expect(note.back).toBe("Paris!\nIf you didn't know, now you know.");
+		}
 	});
 
 	test('Deck parsing: inline front and back', () => {
@@ -105,9 +111,12 @@ describe('Basic note type parsing', () => {
 		expect(errors).toHaveLength(0);
 		const note = notes[0];
 		expect(note.deck).toBe('Common Knowledge');
-		expect(note.front).toBe(
-			'What is the capital of France?\n(Hint: It starts with a P)'
-		);
-		expect(note.back).toBe("Paris!\nIf you didn't know, now you know.");
+		expect(note.type === 'Basic');
+		if (note.type === 'Basic') {
+			expect(note.front).toBe(
+				'What is the capital of France?\n(Hint: It starts with a P)'
+			);
+			expect(note.back).toBe("Paris!\nIf you didn't know, now you know.");
+		}
 	});
 });

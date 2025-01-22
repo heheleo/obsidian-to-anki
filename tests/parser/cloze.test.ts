@@ -54,10 +54,13 @@ describe('Cloze note type parsing', () => {
 		expect(errors).toBeInstanceOf(Array);
 		expect(errors).toHaveLength(0);
 		const note = notes[0];
-		expect(note.front).toBe('The capital of France is {{c1::Paris}}.');
-		expect(note.back).toBe(
-			'Paris is the capital of France, according to the French government.'
-		);
+		expect(note.type).toBe('Cloze');
+		if (note.type === 'Cloze') {
+			expect(note.text).toBe('The capital of France is {{c1::Paris}}.');
+			expect(note.back).toBe(
+				'Paris is the capital of France, according to the French government.'
+			);
+		}
 	});
 
 	test('Multiline back provided', () => {
@@ -79,10 +82,13 @@ describe('Cloze note type parsing', () => {
 		expect(errors).toBeInstanceOf(Array);
 		expect(errors).toHaveLength(0);
 		const note = notes[0];
-		expect(note.front).toBe('The capital of France is {{c1::Paris}}.');
-		expect(note.back).toBe(
-			'According to Wikipedia,\nParis is the capital of France, according to the French government.'
-		);
+		expect(note.type).toBe('Cloze');
+		if (note.type === 'Cloze') {
+			expect(note.text).toBe('The capital of France is {{c1::Paris}}.');
+			expect(note.back).toBe(
+				'According to Wikipedia,\nParis is the capital of France, according to the French government.'
+			);
+		}
 	});
 
 	test('Cloze tag parsing: no ID', () => {
@@ -102,10 +108,12 @@ describe('Cloze note type parsing', () => {
 		expect(errors).toHaveLength(0);
 		const note = notes[0];
 		expect(note.type).toBe('Cloze');
-		expect(note.front).toBe(
-			'The capital of France is {{c1::Paris}}. The capital of Germany is {{c2::Berlin}}.'
-		);
-		expect(note.back).toBeUndefined();
+		if (note.type === 'Cloze') {
+			expect(note.text).toBe(
+				'The capital of France is {{c1::Paris}}. The capital of Germany is {{c2::Berlin}}.'
+			);
+			expect(note.back).toBeUndefined();
+		}
 	});
 
 	test('Cloze tag parsing: no ID, multiline', () => {
@@ -128,10 +136,12 @@ describe('Cloze note type parsing', () => {
 		expect(errors).toHaveLength(0);
 		const note = notes[0];
 		expect(note.type).toBe('Cloze');
-		expect(note.front).toBe(
-			'The capital of France is {{c1::Paris}}.\nThe capital of Germany is {{c2::Berlin}}.\nThe capital of Italy is {{c3::Rome}}.'
-		);
-		expect(note.back).toBeUndefined();
+		if (note.type === 'Cloze') {
+			expect(note.text).toBe(
+				'The capital of France is {{c1::Paris}}.\nThe capital of Germany is {{c2::Berlin}}.\nThe capital of Italy is {{c3::Rome}}.'
+			);
+			expect(note.back).toBeUndefined();
+		}
 	});
 
 	test('Cloze tag parsing: IDs provided', () => {
@@ -151,10 +161,12 @@ describe('Cloze note type parsing', () => {
 		expect(errors).toHaveLength(0);
 		const note = notes[0];
 		expect(note.type).toBe('Cloze');
-		expect(note.front).toBe(
-			'The capital of France is {{c1::Paris}}. The capital of Germany is {{c1::Berlin}}.'
-		);
-		expect(note.back).toBeUndefined();
+		if (note.type === 'Cloze') {
+			expect(note.text).toBe(
+				'The capital of France is {{c1::Paris}}. The capital of Germany is {{c1::Berlin}}.'
+			);
+			expect(note.back).toBeUndefined();
+		}
 	});
 
 	test('Cloze tag parsing: IDs provided, multiline', () => {
@@ -176,10 +188,12 @@ describe('Cloze note type parsing', () => {
 		expect(errors).toHaveLength(0);
 		const note = notes[0];
 		expect(note.type).toBe('Cloze');
-		expect(note.front).toBe(
-			'The capital of Germany is {{c2::Berlin}}.\n(Hint: {{c2::Berlin}} has amazing food.)'
-		);
-		expect(note.back).toBeUndefined();
+		if (note.type === 'Cloze') {
+			expect(note.text).toBe(
+				'The capital of Germany is {{c2::Berlin}}.\n(Hint: {{c2::Berlin}} has amazing food.)'
+			);
+			expect(note.back).toBeUndefined();
+		}
 	});
 
 	test('Deck parsing', () => {

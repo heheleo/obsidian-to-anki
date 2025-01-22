@@ -133,7 +133,7 @@ export function parseClozeChunk(
 	}
 
 	const note: ClozeNote = {
-		front: text,
+		text,
 		back: back.length ? back : undefined,
 		type: 'Cloze',
 		deck
