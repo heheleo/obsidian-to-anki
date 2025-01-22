@@ -1,6 +1,7 @@
 import { type PluginSettings } from 'src/settings/defaults';
 import { parseBasicChunk } from './notetypes/basic';
 import { parseClozeChunk } from './notetypes/cloze';
+import type { App, TFile } from 'obsidian';
 
 export type NoteType = 'Basic' | 'Cloze';
 // | 'Basic (and reversed card)'
@@ -15,6 +16,10 @@ interface BaseNote {
 	 * The deck for which the note belongs to.
 	 */
 	deck: string;
+	/**
+	 * Used to identify the note within Obsidian.
+	 */
+	filePath?: string;
 }
 
 export type Note = BasicNote | ClozeNote;
@@ -62,6 +67,29 @@ export interface ParserError {
 export const isParserError = (obj: any): obj is ParserError => {
 	return obj?.type === 'warning' || (obj?.type === 'error' && obj?.message);
 };
+
+/**
+ * Extracts notes from the given TFiles.
+ * @param TFiles the TFiles to extract notes from
+ * @param settings the settings to use
+ */
+export async function extractNotesFromTFiles(
+	TFiles: TFile[],
+	settings: PluginSettings,
+	app: App
+) {
+	const allNotes = [];
+	const allErrors = [];
+
+	for (const TFile of TFiles) {
+		const text = await app.vault.read(TFile);
+		const { notes, errors } = extractNotes(text, settings);
+		allNotes.push(...notes);
+		allErrors.push(...errors);
+	}
+
+	return { allNotes, allErrors };
+}
 
 /**
  * Extracts notes from the given text.

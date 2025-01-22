@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Icon from 'src/views/Icon.svelte';
+	import Icon from 'src/updating/Icon.svelte';
 	import type { CATEGORIES } from './category';
 
 	const {
